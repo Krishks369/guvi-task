@@ -3,6 +3,7 @@ pipeline {
   environment {
    DOCKERHUB = credentials('docker-cred')
    dockerImage=''
+   registry = 'krishks1234/guvi-task'
   }
   stages {
     stage('Initialize') {
@@ -14,7 +15,7 @@ pipeline {
       steps {
         echo 'Building image'
         script {
-        dockerImage = docker.build('krishks1234/guvi-task')
+        dockerImage = docker.build registry
         docker.withRegistry('', DOCKERHUB) {
         dockerImage.push()
                     }
