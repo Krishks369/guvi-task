@@ -13,13 +13,17 @@ pipeline {
         echo 'Build successful'
       }
     }
+    stage('Docker Login') {
+      steps {
+        sh 'echo $DOCKER_PWD | docker login -u $DOCKER_USER --password-stdin'
+      }
+    }
     
     stage('Pushing image') {
       steps {
-              
-                   sh 'docker push krishks1234/guvi-task'
-              
-             echo 'image pushed'
+           sh 'docker push krishks1234/guvi-task'
+           echo 'image pushed'
+           sh 'docker logout'
            }
       }
     }
