@@ -12,21 +12,18 @@ pipeline {
     stage('Build Image') {
       steps {
         echo 'Building image'
-        sh 'docker build -t krishks1234/guvi-task .'
+        def dockerImage = docker.build('krishks1234/guvi-task')
         echo 'Build successful'
-      }
-    }
-    stage('Docker Login') {
-      steps {
-        sh 'echo $DOCKERHUB_PWD | docker login -u $DOCKERHUB_USR --password-stdin'
       }
     }
     
     stage('Pushing image') {
       steps {
-           sh 'docker push krishks1234/guvi-task'
-           echo 'image pushed'
-           sh 'docker logout'
+           script {
+                    
+                    docker.withRegistry('', DOCKERHUB_USR, DOCKERHUB_PWD) {
+                        dockerImage.push()
+                    }
            }
       }
     }
