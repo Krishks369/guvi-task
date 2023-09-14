@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    DOCKERHUB = credentials('docker-cred')
+  }
   stages {
     stage('Initialize') {
       steps {
@@ -15,7 +18,7 @@ pipeline {
     }
     stage('Docker Login') {
       steps {
-        sh 'echo $DOCKER_PWD | docker login -u $DOCKER_USER --password-stdin'
+        sh 'echo $DOCKERHUB_PWD | docker login -u $DOCKERHUB_USER --password-stdin'
       }
     }
     
