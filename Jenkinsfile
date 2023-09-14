@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Docker Login') {
       steps {
-        sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PWD'
+        sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
       }
     }
       stage('Pushing image') {
