@@ -1,9 +1,7 @@
 pipeline {
   agent any
   environment {
-   DOCKERHUB = credentials('docker-cred')
-   dockerImage=''
-   registry = 'krishks1234/guvi-task'
+    DOCKERHUB = credentials('docker-cred')
   }
   stages {
     stage('Initialize') {
@@ -14,15 +12,22 @@ pipeline {
     stage('Build Image') {
       steps {
         echo 'Building image'
-        script {
-        dockerImage = docker.build registry
-        docker.withRegistry('', DOCKERHUB) {
-        dockerImage.push()
-                    }
+        sh 'docker build -t krishks1234/guvi-task .'
+        echo 'Build successful'
+      }
+    }
+    stage('Docker Login') {
+      steps {
+        sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PWD'
+      }
+    }
+      stage('Pushing image') {
+      steps {
+           sh 'docker push krishks1234/guvi-task'
+           echo 'image pushed'
+           sh 'docker logout'
            }
       }
     }
     
   }
-}
-
