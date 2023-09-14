@@ -9,7 +9,7 @@ pipeline {
     stage('Build Image') {
       steps {
         echo 'Building image'
-        sh 'docker build -t guvi-task .'
+        sh 'docker build -t krishks1234/guvi-task .'
         echo 'Build successful'
       }
     }
