@@ -9,18 +9,17 @@ pipeline {
     stage('Build Image') {
       steps {
         echo 'Building image'
-        sh 'docker build -t simple-website .'
+        sh 'docker build -t guvi-task .'
         echo 'Build successful'
       }
     }
     
-    stage('Provisioning Resources') {
+    stage('Pushing image') {
       steps {
-              echo 'Provisioning resources'
-              dir('/home/ec2-user/terra-files/') {
-                   sh ' terraform apply -auto-approve'
+              
+                   sh 'dccker push krishks1234/guvi-task'
               }
-             echo ' terraform successfull'
+             echo 'image pushed'
         
       }
     }
