@@ -12,17 +12,10 @@ pipeline {
     stage('Build Image') {
       steps {
         echo 'Building image'
+        script {
         def dockerImage = docker.build('krishks1234/guvi-task')
-        echo 'Build successful'
-      }
-    }
-    
-    stage('Pushing image') {
-      steps {
-           script {
-                    
-                    docker.withRegistry('', DOCKERHUB_USR, DOCKERHUB_PWD) {
-                        dockerImage.push()
+        docker.withRegistry('', DOCKERHUB_USR, DOCKERHUB_PWD) {
+        dockerImage.push()
                     }
            }
       }
