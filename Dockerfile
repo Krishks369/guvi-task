@@ -2,7 +2,7 @@ FROM nginx:latest
 
 ARG IMAGE_TAG
 
-COPY guvi.html /usr/share/nginx/html/
+COPY index.html /usr/share/nginx/html/
 
 EXPOSE 80
 
