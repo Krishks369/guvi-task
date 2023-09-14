@@ -18,9 +18,9 @@ pipeline {
       steps {
               
                    sh 'docker push krishks1234/guvi-task'
-              }
+              
              echo 'image pushed'
-        
+           }
       }
     }
     
