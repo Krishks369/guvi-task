@@ -12,10 +12,10 @@ pipeline {
     stage('Build Image') {
       steps {
         echo 'Building image'
-        sh 'docker stop krishks1234/guvi-task|| true'
-        sh 'docker rm krishks1234/guvi-task || true'
+        sh 'docker stop guvi-task|| true'
+        sh 'docker rm guvi-task || true'
         sh 'docker build -t krishks1234/guvi-task .'
-        sh 'docker run -d -p 80:80 krishks1234/guvi-task'
+        sh 'docker run -d -p 80:80 -n guvi-task krishks1234/guvi-task'
         echo 'Build successful'
       }
     }
