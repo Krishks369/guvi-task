@@ -17,7 +17,7 @@ pipeline {
     stage('Pushing image') {
       steps {
               
-                   sh 'dccker push krishks1234/guvi-task'
+                   sh 'docker push krishks1234/guvi-task'
               }
              echo 'image pushed'
         
@@ -25,4 +25,4 @@ pipeline {
     }
     
   }
-}
+
