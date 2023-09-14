@@ -1,7 +1,8 @@
 pipeline {
   agent any
   environment {
-    DOCKERHUB = credentials('dockerhub-cred')
+   DOCKERHUB = credentials('dockerhub-cred')
+   dockerImage=''
   }
   stages {
     stage('Initialize') {
@@ -13,8 +14,8 @@ pipeline {
       steps {
         echo 'Building image'
         script {
-        def dockerImage = docker.build('krishks1234/guvi-task')
-        docker.withRegistry('', DOCKERHUB_USR, DOCKERHUB_PWD) {
+        dockerImage = docker.build('krishks1234/guvi-task')
+        docker.withRegistry('', DOCKERHUB) {
         dockerImage.push()
                     }
            }
